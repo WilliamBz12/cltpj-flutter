@@ -24,7 +24,7 @@ class _CardWidgetState extends State<CardWidget> {
     return Card(
       color: widget.checked ? AppColors.success : AppColors.infoLight,
       child: InkWell(
-        onTap: () => widget.onTap,
+        onTap: () => widget.onTap(),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Row(

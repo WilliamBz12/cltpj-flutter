@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:pjorclt/app/shared/models/pj_model.dart';
 import 'package:pjorclt/app/shared/style/colors.dart';
+import 'package:pjorclt/app/shared/widgets/app_bar.dart';
 import 'package:pjorclt/app/shared/widgets/card_responsible_widget.dart';
 import 'package:pjorclt/app/shared/widgets/custom_text_field_widget.dart';
 import 'package:pjorclt/app/shared/widgets/loading_button_widget.dart';
+
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../provider.dart';
 
 class PjPage extends StatefulWidget {
   final PjModel? pjModel;
@@ -24,7 +28,7 @@ class _PjPageState extends State<PjPage> {
   final anotherMonthlyExpenses$ = TextEditingController();
 
   double getValue(String text) {
-    return double.tryParse(text.replaceAll("R\$", "")) ?? 0;
+    return double.tryParse(text.replaceAll("R\$", "").replaceAll(",", "")) ?? 0;
   }
 
   @override
@@ -50,28 +54,7 @@ class _PjPageState extends State<PjPage> {
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: 20),
-            Row(
-              children: [
-                SizedBox(width: 10),
-                IconButton(
-                  onPressed: () => Navigator.pop(context),
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: Colors.white,
-                  ),
-                ),
-                SizedBox(width: 20),
-                Text(
-                  "Dados PJ",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 18,
-                  ),
-                ),
-              ],
-            ),
+            SizedAppBar("Dados PJ"),
             Expanded(
               child: CardResponsibleWidget(
                 child: Column(
@@ -97,8 +80,11 @@ class _PjPageState extends State<PjPage> {
                           vacationYearDays: getValue(vacationDaysPerYear$.text),
                           vacationPaid: true,
                         );
+                        context
+                            .read(dataComparationProvider.notifier)
+                            .addPjModel(data);
 
-                        Navigator.pop(context, data);
+                        Navigator.pop(context);
                       },
                     ),
                   ],

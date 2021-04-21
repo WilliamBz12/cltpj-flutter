@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:pjorclt/app/shared/models/clt_model.dart';
 import 'package:pjorclt/app/shared/style/colors.dart';
+import 'package:pjorclt/app/shared/widgets/app_bar.dart';
 import 'package:pjorclt/app/shared/widgets/card_responsible_widget.dart';
 import 'package:pjorclt/app/shared/widgets/custom_text_field_widget.dart';
 import 'package:pjorclt/app/shared/widgets/loading_button_widget.dart';
@@ -37,28 +38,7 @@ class _CltPageState extends State<CltPage> {
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: 20),
-            Row(
-              children: [
-                SizedBox(width: 10),
-                IconButton(
-                  onPressed: () => Navigator.pop(context),
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: Colors.white,
-                  ),
-                ),
-                SizedBox(width: 20),
-                Text(
-                  "Dados CLT",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 18,
-                  ),
-                ),
-              ],
-            ),
+            SizedAppBar("Dados CLT"),
             Expanded(
               child: CardResponsibleWidget(
                 child: Column(

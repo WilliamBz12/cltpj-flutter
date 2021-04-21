@@ -1,24 +1,5 @@
 import 'package:flutter/material.dart';
-
-enum ScreenSize {
-  small,
-  medium,
-  large,
-}
-
-ScreenSize currentScreenSize(BuildContext context) {
-  final width = MediaQuery.of(context).size.width;
-
-  if (width <= 400) {
-    return ScreenSize.small;
-  }
-
-  if (width > 400 && width < 700) {
-    return ScreenSize.medium;
-  }
-
-  return ScreenSize.large;
-}
+import 'package:pjorclt/app/shared/utils/screen_size.dart';
 
 class CardResponsibleWidget extends StatelessWidget {
   CardResponsibleWidget({required this.child});
@@ -27,15 +8,17 @@ class CardResponsibleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = currentScreenSize(context);
-    return Container(
-      margin: const EdgeInsets.all(20.0),
-      width: screenSize == ScreenSize.small ? double.maxFinite : 400,
-      padding: EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(18),
+    return Center(
+      child: Container(
+        margin: const EdgeInsets.all(20.0),
+        width: screenSize == ScreenSize.medium ? double.maxFinite : 500,
+        padding: EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(18),
+        ),
+        child: child,
       ),
-      child: child,
     );
   }
 }
