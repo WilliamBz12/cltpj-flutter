@@ -1,10 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pjorclt/app/router/router.gr.dart';
+import 'package:pjorclt/app/shared/notifiers/comparation_state.dart';
 import 'package:pjorclt/app/shared/style/colors.dart';
 import 'package:pjorclt/app/shared/widgets/card_responsible_widget.dart';
 import 'package:pjorclt/app/shared/widgets/loading_button_widget.dart';
 
+import '../../provider.dart';
 import 'widgets/card_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -49,13 +52,41 @@ class _HomePageState extends State<HomePage> {
             checked: false,
           ),
           SizedBox(height: 20),
-          LoadingButtonWidget(
-            onTap: () {
-              ExtendedNavigator.root.push(Routes.pjPage);
+          ProviderListener<ComparationState>(
+            provider: comparationNotifierProvider.state,
+            onChange: (context, state) {
+              if (state is ComparationError) {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    content: Text(state.message),
+                  ),
+                );
+              }
+
+              if (state is ComparationLoaded) {
+                ExtendedNavigator.root.push(
+                  Routes.cltPage,
+                  arguments: state.comparation,
+                );
+              }
             },
-            text: "Calcular",
-            color: AppColors.success,
-            textColor: Colors.white,
+            child: Consumer(
+              builder: (context, watch, child) {
+                final state = watch(comparationNotifierProvider.state);
+                return LoadingButtonWidget(
+                  onTap: () {
+                    context
+                        .read(comparationNotifierProvider)
+                        .getComparation(null, null);
+                  },
+                  isLoading: state is ComparationLoading,
+                  text: "Calcular",
+                  color: AppColors.success,
+                  textColor: Colors.white,
+                );
+              },
+            ),
           ),
         ],
       ),
