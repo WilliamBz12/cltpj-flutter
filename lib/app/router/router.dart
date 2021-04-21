@@ -1,4 +1,4 @@
-import 'package:auto_route/auto_route_annotations.dart';
+import 'package:auto_route/annotations.dart';
 import 'package:pjorclt/app/pages/clt/clt_page.dart';
 import 'package:pjorclt/app/pages/home/home_page.dart';
 import 'package:pjorclt/app/pages/pj/pj_page.dart';

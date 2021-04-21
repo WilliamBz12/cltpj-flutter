@@ -21,7 +21,7 @@ ScreenSize currentScreenSize(BuildContext context) {
 }
 
 class CardResponsibleWidget extends StatelessWidget {
-  CardResponsibleWidget({@required this.child});
+  CardResponsibleWidget({required this.child});
   final Widget child;
 
   @override

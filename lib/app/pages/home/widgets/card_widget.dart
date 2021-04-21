@@ -4,13 +4,13 @@ import 'package:pjorclt/app/shared/style/colors.dart';
 class CardWidget extends StatefulWidget {
   final String title;
   final Function onTap;
-  final Function clear;
+  final Function? clear;
   final bool checked;
 
   CardWidget({
-    this.title,
-    this.checked,
-    this.onTap,
+    required this.title,
+    required this.onTap,
+    this.checked = false,
     this.clear,
   });
 
@@ -24,7 +24,7 @@ class _CardWidgetState extends State<CardWidget> {
     return Card(
       color: widget.checked ? AppColors.success : AppColors.infoLight,
       child: InkWell(
-        onTap: widget.onTap,
+        onTap: () => widget.onTap,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Row(
@@ -39,7 +39,7 @@ class _CardWidgetState extends State<CardWidget> {
               ),
               if (widget.checked)
                 IconButton(
-                  onPressed: widget.clear,
+                  onPressed: () => widget.clear,
                   icon: Icon(
                     Icons.delete,
                     color: Colors.white,

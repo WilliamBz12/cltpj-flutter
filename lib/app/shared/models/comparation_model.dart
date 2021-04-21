@@ -5,8 +5,11 @@ part 'comparation_model.g.dart';
 
 @CopyWith()
 class ComparationModel {
-  final PjModel pjModel;
-  final CltModel cltModel;
+  final PjModel? pjModel;
+  final CltModel? cltModel;
 
-  ComparationModel({this.pjModel, this.cltModel});
+  ComparationModel({
+    this.pjModel,
+    this.cltModel,
+  });
 }

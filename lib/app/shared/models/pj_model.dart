@@ -14,14 +14,14 @@ class PjModel {
   double anotherMonthExpenses;
 
   PjModel({
-    this.anotherYearExpenses,
-    this.expensesMotnherAccountant,
-    this.anotherMonthExpenses,
-    this.monthlyValue,
-    this.monthyBenefits,
-    this.taxPercentage,
-    this.vacationPaid,
-    this.vacationYearDays,
+    required this.anotherYearExpenses,
+    required this.expensesMotnherAccountant,
+    required this.anotherMonthExpenses,
+    required this.monthlyValue,
+    required this.monthyBenefits,
+    required this.taxPercentage,
+    required this.vacationPaid,
+    required this.vacationYearDays,
   });
 }
 

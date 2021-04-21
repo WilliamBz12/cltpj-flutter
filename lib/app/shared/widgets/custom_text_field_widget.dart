@@ -3,27 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:pjorclt/app/shared/style/colors.dart';
 
 class DefaultTextFieldWidget extends StatefulWidget {
-  final String hintText;
-  final TextInputType keyboardType;
+  final String? hintText;
+  final TextInputType? keyboardType;
   final TextEditingController controller;
-  final Function onTap;
-  final bool obscureText;
-  final Widget prefixIcon;
-  final Widget suffixIcon;
-  final bool disable;
-  final bool autoFocus;
-  final FocusNode focusNode;
-  final String message;
-  final int lines;
-  final void Function(String) onChanged;
-  final List<TextInputFormatter> inputFormatters;
+  final Function? onTap;
+  final bool? obscureText;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
+  final bool? disable;
+  final bool? autoFocus;
+  final FocusNode? focusNode;
+  final String? message;
+  final int? lines;
+  final void Function(String?)? onChanged;
+  final List<TextInputFormatter>? inputFormatters;
 
-  final void Function(String) onValidator;
+  final void Function(String?)? onValidator;
 
   DefaultTextFieldWidget({
     this.hintText,
     this.keyboardType,
-    @required this.controller,
+    required this.controller,
     this.prefixIcon,
     this.suffixIcon,
     this.onTap,
@@ -50,17 +50,18 @@ class _DefaultTextFieldWidgetState extends State<DefaultTextFieldWidget> {
       children: <Widget>[
         TextFormField(
           focusNode: widget.focusNode,
-          keyboardType: widget?.keyboardType,
-          obscureText: widget?.obscureText,
-          controller: widget?.controller,
-          autofocus: widget?.autoFocus,
-          onChanged: widget?.onChanged,
-          onTap: widget.onTap,
-          enableInteractiveSelection: widget?.onTap == null,
-          enabled: !widget.disable,
+          keyboardType: widget.keyboardType,
+          obscureText: widget.obscureText ?? false,
+          controller: widget.controller,
+          onChanged: widget.onChanged,
           readOnly: widget.onTap != null,
-          inputFormatters: widget?.inputFormatters ?? [],
-          validator: widget.onValidator,
+          inputFormatters: widget.inputFormatters ?? [],
+          validator: (text) {
+            if (text == null) {
+              return "Campo não pode ser vazio";
+            }
+            return null;
+          },
           maxLines: widget.lines,
           decoration: InputDecoration(
             border: OutlineInputBorder(
@@ -74,8 +75,8 @@ class _DefaultTextFieldWidgetState extends State<DefaultTextFieldWidget> {
               horizontal: 10,
               vertical: 15,
             ),
-            prefixIcon: widget?.prefixIcon,
-            suffixIcon: widget?.suffixIcon,
+            prefixIcon: widget.prefixIcon,
+            suffixIcon: widget.suffixIcon,
           ),
         ),
         SizedBox(height: 20),

@@ -11,8 +11,8 @@ class LoadingButtonWidget extends StatelessWidget {
   final double buttonWidth;
 
   LoadingButtonWidget({
-    @required this.text,
-    @required this.onTap,
+    required this.text,
+    required this.onTap,
     this.color = AppColors.white,
     this.isLoading = false,
     this.buttonWidth = double.infinity,
@@ -40,7 +40,7 @@ class LoadingButtonWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(6),
         ),
         elevation: 5,
-        onPressed: !isLoading ? onTap : null,
+        onPressed: !isLoading ? () => onTap : null,
       ),
     );
   }

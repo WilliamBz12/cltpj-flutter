@@ -7,7 +7,7 @@ import 'package:pjorclt/app/shared/widgets/custom_text_field_widget.dart';
 import 'package:pjorclt/app/shared/widgets/loading_button_widget.dart';
 
 class PjPage extends StatefulWidget {
-  final PjModel pjModel;
+  final PjModel? pjModel;
 
   PjPage({@required this.pjModel});
   @override
@@ -24,23 +24,24 @@ class _PjPageState extends State<PjPage> {
   final anotherMonthlyExpenses$ = TextEditingController();
 
   double getValue(String text) {
-    return double.tryParse(text.replaceAll("R\$", ""));
+    return double.tryParse(text.replaceAll("R\$", "")) ?? 0;
   }
 
   @override
   void initState() {
     super.initState();
 
-    monthlyValue$.text = widget?.pjModel?.monthlyValue?.toString();
-    vacationDaysPerYear$.text = widget?.pjModel?.vacationYearDays?.toString();
-    monthyBenefits$.text = widget?.pjModel?.monthyBenefits?.toString();
-    taxPercentage$.text = widget?.pjModel?.taxPercentage?.toString();
+    monthlyValue$.text = widget.pjModel?.monthlyValue.toString() ?? "";
+    vacationDaysPerYear$.text =
+        widget.pjModel?.vacationYearDays.toString() ?? "";
+    monthyBenefits$.text = widget.pjModel?.monthyBenefits.toString() ?? "";
+    taxPercentage$.text = widget.pjModel?.taxPercentage.toString() ?? "";
     expensesMontherAccountant$.text =
-        widget?.pjModel?.expensesMotnherAccountant?.toString();
+        widget.pjModel?.expensesMotnherAccountant.toString() ?? "";
     anotherYearExpenses$.text =
-        widget?.pjModel?.anotherYearExpenses?.toString();
+        widget.pjModel?.anotherYearExpenses.toString() ?? "";
     anotherMonthlyExpenses$.text =
-        widget?.pjModel?.anotherMonthExpenses?.toString();
+        widget.pjModel?.anotherMonthExpenses.toString() ?? "";
   }
 
   @override
@@ -94,6 +95,7 @@ class _PjPageState extends State<PjPage> {
                           monthyBenefits: getValue(monthyBenefits$.text),
                           taxPercentage: getValue(taxPercentage$.text),
                           vacationYearDays: getValue(vacationDaysPerYear$.text),
+                          vacationPaid: true,
                         );
 
                         Navigator.pop(context, data);

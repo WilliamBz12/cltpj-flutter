@@ -4,65 +4,60 @@
 // AutoRouteGenerator
 // **************************************************************************
 
-// ignore_for_file: public_member_api_docs
+import 'package:auto_route/auto_route.dart' as _i1;
+import 'package:pjorclt/app/pages/clt/clt_page.dart' as _i3;
+import 'package:pjorclt/app/pages/home/home_page.dart' as _i2;
+import 'package:pjorclt/app/pages/pj/pj_page.dart' as _i4;
+import 'package:pjorclt/app/shared/models/pj_model.dart' as _i5;
 
-import 'package:auto_route/auto_route.dart';
+class AppRouter extends _i1.RootStackRouter {
+  AppRouter();
 
-import '../pages/clt/clt_page.dart';
-import '../pages/home/home_page.dart';
-import '../pages/pj/pj_page.dart';
-import '../shared/models/pj_model.dart';
-
-class Routes {
-  static const String homePage = '/';
-  static const String cltPage = '/clt-page';
-  static const String pjPage = '/pj-page';
-  static const all = <String>{
-    homePage,
-    cltPage,
-    pjPage,
+  @override
+  final Map<String, _i1.PageFactory> pagesMap = {
+    HomePageRoute.name: (entry) {
+      return _i1.AdaptivePage(entry: entry, child: _i2.HomePage());
+    },
+    CltPageRoute.name: (entry) {
+      return _i1.AdaptivePage(entry: entry, child: _i3.CltPage());
+    },
+    PjPageRoute.name: (entry) {
+      var args = entry.routeData
+          .argsAs<PjPageRouteArgs>(orElse: () => PjPageRouteArgs());
+      return _i1.AdaptivePage(
+          entry: entry, child: _i4.PjPage(pjModel: args.pjModel));
+    }
   };
+
+  @override
+  List<_i1.RouteConfig> get routes => [
+        _i1.RouteConfig(HomePageRoute.name, path: '/'),
+        _i1.RouteConfig(CltPageRoute.name, path: '/clt-page'),
+        _i1.RouteConfig(PjPageRoute.name, path: '/pj-page')
+      ];
 }
 
-class AppRouter extends RouterBase {
-  @override
-  List<RouteDef> get routes => _routes;
-  final _routes = <RouteDef>[
-    RouteDef(Routes.homePage, page: HomePage),
-    RouteDef(Routes.cltPage, page: CltPage),
-    RouteDef(Routes.pjPage, page: PjPage),
-  ];
-  @override
-  Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
-  final _pagesMap = <Type, AutoRouteFactory>{
-    HomePage: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => HomePage(),
-        settings: data,
-      );
-    },
-    CltPage: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => CltPage(),
-        settings: data,
-      );
-    },
-    PjPage: (data) {
-      final args = data.getArgs<PjPageArguments>(nullOk: false);
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => PjPage(pjModel: args.pjModel),
-        settings: data,
-      );
-    },
-  };
+class HomePageRoute extends _i1.PageRouteInfo {
+  const HomePageRoute() : super(name, path: '/');
+
+  static const String name = 'HomePageRoute';
 }
 
-/// ************************************************************************
-/// Arguments holder classes
-/// *************************************************************************
+class CltPageRoute extends _i1.PageRouteInfo {
+  const CltPageRoute() : super(name, path: '/clt-page');
 
-/// PjPage arguments holder class
-class PjPageArguments {
-  final PjModel pjModel;
-  PjPageArguments({@required this.pjModel});
+  static const String name = 'CltPageRoute';
+}
+
+class PjPageRoute extends _i1.PageRouteInfo<PjPageRouteArgs> {
+  PjPageRoute({_i5.PjModel? pjModel})
+      : super(name, path: '/pj-page', args: PjPageRouteArgs(pjModel: pjModel));
+
+  static const String name = 'PjPageRoute';
+}
+
+class PjPageRouteArgs {
+  const PjPageRouteArgs({this.pjModel});
+
+  final _i5.PjModel? pjModel;
 }

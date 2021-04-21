@@ -6,6 +6,10 @@ import 'package:pjorclt/app/shared/widgets/card_responsible_widget.dart';
 import 'package:pjorclt/app/shared/widgets/custom_text_field_widget.dart';
 import 'package:pjorclt/app/shared/widgets/loading_button_widget.dart';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../provider.dart';
+
 class CltPage extends StatefulWidget {
   @override
   _CltPageState createState() => _CltPageState();
@@ -24,7 +28,7 @@ class _CltPageState extends State<CltPage> {
   final anotherDiscounts$ = TextEditingController();
 
   double getValue(String text) {
-    return double.tryParse(text.replaceAll("R\$", ""));
+    return double.tryParse(text.replaceAll("R\$", "")) ?? 0;
   }
 
   @override
@@ -69,11 +73,11 @@ class _CltPageState extends State<CltPage> {
                       onTap: () {
                         final data = CltModel(
                           anotherBenefitsValue:
-                              getValue(anotherBenefitsValue$?.text),
-                          anotherDiscounts: getValue(anotherDiscounts$?.text),
+                              getValue(anotherBenefitsValue$.text),
+                          anotherDiscounts: getValue(anotherDiscounts$.text),
                           diaryRefettionValue:
-                              getValue(diaryRefettionValue$?.text),
-                          foodValue: getValue(foodValue$?.text),
+                              getValue(diaryRefettionValue$.text),
+                          foodValue: getValue(foodValue$.text),
                           garageValue: getValue(garageValue$.text),
                           medicalAssistenceValue:
                               getValue(medicalAssistenceValue$.text),
@@ -84,7 +88,10 @@ class _CltPageState extends State<CltPage> {
                           phoneValue: getValue(phoneValue$.text),
                           plrAnnual: getValue(plrAnnual$.text),
                         );
-                        Navigator.pop(context, data);
+                        context
+                            .read(dataComparationProvider.notifier)
+                            .addCltModel(data);
+                        Navigator.pop(context);
                       },
                     ),
                   ],

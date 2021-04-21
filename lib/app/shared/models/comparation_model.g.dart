@@ -8,8 +8,8 @@ part of 'comparation_model.dart';
 
 extension ComparationModelCopyWith on ComparationModel {
   ComparationModel copyWith({
-    CltModel cltModel,
-    PjModel pjModel,
+    CltModel? cltModel,
+    PjModel? pjModel,
   }) {
     return ComparationModel(
       cltModel: cltModel ?? this.cltModel,

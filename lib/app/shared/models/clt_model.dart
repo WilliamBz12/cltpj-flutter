@@ -13,16 +13,16 @@ class CltModel {
   double anotherDiscounts;
 
   CltModel({
-    this.anotherBenefitsValue,
-    this.diaryRefettionValue,
-    this.foodValue,
-    this.garageValue,
-    this.medicalAssistenceValue,
-    this.monthlyFixedSalary,
-    this.monthlyVariableSalary,
-    this.phoneValue,
-    this.plrAnnual,
-    this.anotherDiscounts,
+    required this.anotherBenefitsValue,
+    required this.diaryRefettionValue,
+    required this.foodValue,
+    required this.garageValue,
+    required this.medicalAssistenceValue,
+    required this.monthlyFixedSalary,
+    required this.monthlyVariableSalary,
+    required this.phoneValue,
+    required this.plrAnnual,
+    required this.anotherDiscounts,
   });
 
   double get annualGrossSalary =>
