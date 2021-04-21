@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
+import 'package:pjorclt/app/shared/models/clt_model.dart';
 import 'package:pjorclt/app/shared/style/colors.dart';
 import 'package:pjorclt/app/shared/widgets/card_responsible_widget.dart';
 import 'package:pjorclt/app/shared/widgets/custom_text_field_widget.dart';
@@ -21,6 +22,10 @@ class _CltPageState extends State<CltPage> {
   final phoneValue$ = TextEditingController();
   final anotherBenefitsValue$ = TextEditingController();
   final anotherDiscounts$ = TextEditingController();
+
+  double getValue(String text) {
+    return double.tryParse(text.replaceAll("R\$", ""));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +66,26 @@ class _CltPageState extends State<CltPage> {
                       text: "Concluir",
                       color: AppColors.primary,
                       textColor: Colors.white,
-                      onTap: () {},
+                      onTap: () {
+                        final data = CltModel(
+                          anotherBenefitsValue:
+                              getValue(anotherBenefitsValue$?.text),
+                          anotherDiscounts: getValue(anotherDiscounts$?.text),
+                          diaryRefettionValue:
+                              getValue(diaryRefettionValue$?.text),
+                          foodValue: getValue(foodValue$?.text),
+                          garageValue: getValue(garageValue$.text),
+                          medicalAssistenceValue:
+                              getValue(medicalAssistenceValue$.text),
+                          monthlyFixedSalary:
+                              getValue(monthlyFixedSalary$.text),
+                          monthlyVariableSalary:
+                              getValue(monthlyVariableSalary$.text),
+                          phoneValue: getValue(phoneValue$.text),
+                          plrAnnual: getValue(plrAnnual$.text),
+                        );
+                        Navigator.pop(context, data);
+                      },
                     ),
                   ],
                 ),

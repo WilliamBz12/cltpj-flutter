@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
+import 'package:pjorclt/app/shared/models/pj_model.dart';
 import 'package:pjorclt/app/shared/style/colors.dart';
 import 'package:pjorclt/app/shared/widgets/card_responsible_widget.dart';
 import 'package:pjorclt/app/shared/widgets/custom_text_field_widget.dart';
 import 'package:pjorclt/app/shared/widgets/loading_button_widget.dart';
 
 class PjPage extends StatefulWidget {
+  final PjModel pjModel;
+
+  PjPage({@required this.pjModel});
   @override
   _PjPageState createState() => _PjPageState();
 }
@@ -17,6 +21,27 @@ class _PjPageState extends State<PjPage> {
   final taxPercentage$ = TextEditingController();
   final expensesMontherAccountant$ = TextEditingController();
   final anotherYearExpenses$ = TextEditingController();
+  final anotherMonthlyExpenses$ = TextEditingController();
+
+  double getValue(String text) {
+    return double.tryParse(text.replaceAll("R\$", ""));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    monthlyValue$.text = widget?.pjModel?.monthlyValue?.toString();
+    vacationDaysPerYear$.text = widget?.pjModel?.vacationYearDays?.toString();
+    monthyBenefits$.text = widget?.pjModel?.monthyBenefits?.toString();
+    taxPercentage$.text = widget?.pjModel?.taxPercentage?.toString();
+    expensesMontherAccountant$.text =
+        widget?.pjModel?.expensesMotnherAccountant?.toString();
+    anotherYearExpenses$.text =
+        widget?.pjModel?.anotherYearExpenses?.toString();
+    anotherMonthlyExpenses$.text =
+        widget?.pjModel?.anotherMonthExpenses?.toString();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +82,22 @@ class _PjPageState extends State<PjPage> {
                       text: "Concluir",
                       color: AppColors.primary,
                       textColor: Colors.white,
-                      onTap: () {},
+                      onTap: () {
+                        final data = PjModel(
+                          anotherMonthExpenses:
+                              getValue(anotherMonthlyExpenses$.text),
+                          anotherYearExpenses:
+                              getValue(anotherYearExpenses$.text),
+                          expensesMotnherAccountant:
+                              getValue(expensesMontherAccountant$.text),
+                          monthlyValue: getValue(monthlyValue$.text),
+                          monthyBenefits: getValue(monthyBenefits$.text),
+                          taxPercentage: getValue(taxPercentage$.text),
+                          vacationYearDays: getValue(vacationDaysPerYear$.text),
+                        );
+
+                        Navigator.pop(context, data);
+                      },
                     ),
                   ],
                 ),
@@ -92,7 +132,7 @@ class _PjPageState extends State<PjPage> {
             ),
             DefaultTextFieldWidget(
               controller: monthyBenefits$,
-              hintText: "Valor dps beneficios Mensais",
+              hintText: "Valor dos beneficios Mensais",
               prefixIcon: Icon(Icons.money),
               keyboardType: TextInputType.number,
               inputFormatters: [MoneyInputFormatter(leadingSymbol: "R\$")],
@@ -107,6 +147,14 @@ class _PjPageState extends State<PjPage> {
             DefaultTextFieldWidget(
               controller: expensesMontherAccountant$,
               hintText: "Gastos Mensais com o contador",
+              prefixIcon: Icon(Icons.money),
+              keyboardType: TextInputType.number,
+              inputFormatters: [MoneyInputFormatter(leadingSymbol: "R\$")],
+            ),
+            DefaultTextFieldWidget(
+              controller: anotherMonthlyExpenses$,
+              hintText:
+                  "Outras despesas mensais (INSS, Plano de saúde, Previdência, ...)",
               prefixIcon: Icon(Icons.money),
               keyboardType: TextInputType.number,
               inputFormatters: [MoneyInputFormatter(leadingSymbol: "R\$")],

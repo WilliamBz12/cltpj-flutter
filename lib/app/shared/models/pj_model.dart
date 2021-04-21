@@ -11,6 +11,18 @@ class PjModel {
 
   double expensesMotnherAccountant;
   double anotherYearExpenses;
+  double anotherMonthExpenses;
+
+  PjModel({
+    this.anotherYearExpenses,
+    this.expensesMotnherAccountant,
+    this.anotherMonthExpenses,
+    this.monthlyValue,
+    this.monthyBenefits,
+    this.taxPercentage,
+    this.vacationPaid,
+    this.vacationYearDays,
+  });
 }
 
 // Rendimento anual bruto

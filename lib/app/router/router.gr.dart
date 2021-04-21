@@ -11,6 +11,7 @@ import 'package:auto_route/auto_route.dart';
 import '../pages/clt/clt_page.dart';
 import '../pages/home/home_page.dart';
 import '../pages/pj/pj_page.dart';
+import '../shared/models/pj_model.dart';
 
 class Routes {
   static const String homePage = '/';
@@ -47,10 +48,21 @@ class AppRouter extends RouterBase {
       );
     },
     PjPage: (data) {
+      final args = data.getArgs<PjPageArguments>(nullOk: false);
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => PjPage(),
+        builder: (context) => PjPage(pjModel: args.pjModel),
         settings: data,
       );
     },
   };
+}
+
+/// ************************************************************************
+/// Arguments holder classes
+/// *************************************************************************
+
+/// PjPage arguments holder class
+class PjPageArguments {
+  final PjModel pjModel;
+  PjPageArguments({@required this.pjModel});
 }
