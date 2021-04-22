@@ -72,30 +72,3 @@ class CltModel {
 
   double get totalLiquidWithFgts => rendimentsWithFgts - allDiscounts;
 }
-
-// Salário anual bruto
-// Remuneração fixa mensal (bruta)
-// Remuneração variável mensal (bruta)
-//
-// Férias
-// Remuneração de férias (fixa + variável)
-// Adicional de férias (1/3)
-//
-// 13o. Salário
-// Remuneração de 13o.
-//
-// Participação nos Lucros
-// % anual sobre remuneração fixa mensal
-//
-// Benefícios anuais
-// Valor diário de vale refeição
-// Valor mensal da assistência médica
-// Valor mensal de garagem
-// Valor mensal de celular
-// Valor mensal de outros benefícios
-
-// Descontos anuais
-// INSS (salário, 13o. e férias)
-// IRPF (Simples - Dedução 20% ou R$9.400)
-// Vale refeição (anual) - Dedução 20%
-// Outros descontos anuais (sindical etc.)

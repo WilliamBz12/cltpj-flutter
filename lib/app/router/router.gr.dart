@@ -8,7 +8,9 @@ import 'package:auto_route/auto_route.dart' as _i1;
 import 'package:pjorclt/app/pages/clt/clt_page.dart' as _i3;
 import 'package:pjorclt/app/pages/home/home_page.dart' as _i2;
 import 'package:pjorclt/app/pages/pj/pj_page.dart' as _i4;
-import 'package:pjorclt/app/shared/models/pj_model.dart' as _i5;
+import 'package:pjorclt/app/pages/result/result_page.dart' as _i5;
+import 'package:pjorclt/app/shared/models/comparation_model.dart' as _i7;
+import 'package:pjorclt/app/shared/models/pj_model.dart' as _i6;
 
 class AppRouter extends _i1.RootStackRouter {
   AppRouter();
@@ -26,6 +28,11 @@ class AppRouter extends _i1.RootStackRouter {
           .argsAs<PjPageRouteArgs>(orElse: () => PjPageRouteArgs());
       return _i1.AdaptivePage(
           entry: entry, child: _i4.PjPage(pjModel: args.pjModel));
+    },
+    ResultPageRoute.name: (entry) {
+      var args = entry.routeData.argsAs<ResultPageRouteArgs>();
+      return _i1.AdaptivePage(
+          entry: entry, child: _i5.ResultPage(data: args.data));
     }
   };
 
@@ -33,7 +40,8 @@ class AppRouter extends _i1.RootStackRouter {
   List<_i1.RouteConfig> get routes => [
         _i1.RouteConfig(HomePageRoute.name, path: '/'),
         _i1.RouteConfig(CltPageRoute.name, path: '/clt-page'),
-        _i1.RouteConfig(PjPageRoute.name, path: '/pj-page')
+        _i1.RouteConfig(PjPageRoute.name, path: '/pj-page'),
+        _i1.RouteConfig(ResultPageRoute.name, path: '/result-page')
       ];
 }
 
@@ -50,7 +58,7 @@ class CltPageRoute extends _i1.PageRouteInfo {
 }
 
 class PjPageRoute extends _i1.PageRouteInfo<PjPageRouteArgs> {
-  PjPageRoute({_i5.PjModel? pjModel})
+  PjPageRoute({_i6.PjModel? pjModel})
       : super(name, path: '/pj-page', args: PjPageRouteArgs(pjModel: pjModel));
 
   static const String name = 'PjPageRoute';
@@ -59,5 +67,19 @@ class PjPageRoute extends _i1.PageRouteInfo<PjPageRouteArgs> {
 class PjPageRouteArgs {
   const PjPageRouteArgs({this.pjModel});
 
-  final _i5.PjModel? pjModel;
+  final _i6.PjModel? pjModel;
+}
+
+class ResultPageRoute extends _i1.PageRouteInfo<ResultPageRouteArgs> {
+  ResultPageRoute({required _i7.ComparationModel data})
+      : super(name,
+            path: '/result-page', args: ResultPageRouteArgs(data: data));
+
+  static const String name = 'ResultPageRoute';
+}
+
+class ResultPageRouteArgs {
+  const ResultPageRouteArgs({required this.data});
+
+  final _i7.ComparationModel data;
 }

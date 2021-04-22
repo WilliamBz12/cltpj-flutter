@@ -12,4 +12,17 @@ class ComparationModel {
     this.pjModel,
     this.cltModel,
   });
+
+  String get bestOption =>
+      (pjModel!.liquidValue > (cltModel!.liquidValueTotal + cltModel!.fgts))
+          ? "EMPRESA"
+          : "CLT";
+
+  double get morePercent => bestOption == "EMPRESA"
+      ? pjModel!.liquidValue / (cltModel!.liquidValueTotal + cltModel!.fgts)
+      : (cltModel!.liquidValueTotal + cltModel!.fgts) / pjModel!.liquidValue;
+
+  double get diferenceYearLiquid => bestOption == "EMPRESA"
+      ? pjModel!.liquidValue - (cltModel!.liquidValueTotal + cltModel!.fgts)
+      : (cltModel!.liquidValueTotal + cltModel!.fgts) - (pjModel!.liquidValue);
 }

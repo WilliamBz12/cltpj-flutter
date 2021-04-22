@@ -73,10 +73,9 @@ class _HomePageState extends State<HomePage> {
                   }
 
                   if (state is ComparationLoaded) {
-                    // ExtendedNavigator.root.push(
-                    //   Routes.cltPage,
-                    //   arguments: state.comparation,
-                    // );
+                    context.router.root.push(
+                      ResultPageRoute(data: state.comparation),
+                    );
                   }
                 },
                 child: Consumer(

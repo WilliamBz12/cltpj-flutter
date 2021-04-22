@@ -23,28 +23,22 @@ class PjModel {
     required this.vacationPaid,
     required this.vacationYearDays,
   });
+
+  double get yearAmount => (12 - vacationYearDays / 30) * monthlyValue;
+
+  double get vacationAmount =>
+      vacationPaid ? monthlyValue * (vacationYearDays / 30) : 0;
+
+  double get yearBenefits => monthyBenefits * 12;
+
+  double get yearDiscount =>
+      (expensesMotnherAccountant +
+              anotherMonthExpenses +
+              (taxPercentage * monthlyValue)) *
+          12 +
+      anotherYearExpenses;
+
+  double get allRendimentsPerYear => yearAmount + vacationAmount + yearBenefits;
+
+  double get liquidValue => allRendimentsPerYear - yearDiscount;
 }
-
-// Rendimento anual bruto
-// Valor da nota mensal fixo (bruto)
-// Férias
-// Férias remuneradas?
-// Dias de férias por ano
-// Benefícios anuais
-// Valor mensal de garagem
-// Valor mensal de celular
-// Valor mensal de outros benefícios
-
-// Descontos anuais
-// Pro-Labore / Salário-Base para INSS
-// INSS PF (Classe 1 - Salário-Base R$3135,)
-// Outros
-// INSS PJ (Pro-Labore R$3135,)
-// ISSQN (%)
-// PIS
-// Confins
-// IR
-// Contribuição Social (CSLL)
-// Despesas com contador (mensal)
-// Contribuição sindical anual
-// Despesas anuais com a empresa

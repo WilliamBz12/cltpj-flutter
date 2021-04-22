@@ -14,8 +14,8 @@ class ComparationNotifier extends StateNotifier<ComparationState> {
       state = ComparationLoading();
       final result = await _repository.calculate(comparation: comparation);
       state = ComparationLoaded(result);
-    } on Exception {
-      state = ComparationError("Couldn't fetch");
+    } on Exception catch (e) {
+      state = ComparationError("${e.toString()}");
     }
   }
 }

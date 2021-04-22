@@ -111,7 +111,6 @@ class _CltPageState extends State<CltPage> {
               hintText: "PLR anual (multiplos da remuneração fixa)",
               prefixIcon: Icon(Icons.money),
               keyboardType: TextInputType.number,
-              inputFormatters: [MoneyInputFormatter(leadingSymbol: "R\$")],
             ),
             DefaultTextFieldWidget(
               controller: diaryRefettionValue$,
@@ -149,7 +148,7 @@ class _CltPageState extends State<CltPage> {
               inputFormatters: [MoneyInputFormatter(leadingSymbol: "R\$")],
             ),
             DefaultTextFieldWidget(
-              controller: garageValue$,
+              controller: anotherDiscounts$,
               hintText: "Valor mensal de outros gastos",
               prefixIcon: Icon(Icons.money),
               keyboardType: TextInputType.number,
