@@ -28,7 +28,10 @@ class _PjPageState extends State<PjPage> {
   final anotherMonthlyExpenses$ = TextEditingController();
 
   double getValue(String text) {
-    return double.tryParse(text.replaceAll("R\$", "").replaceAll(",", "")) ?? 0;
+    final withoutCaractere =
+        text.replaceAll("R\$", "").replaceAll(",", "").replaceAll("%", "");
+    final data = double.tryParse(withoutCaractere) ?? 0;
+    return data;
   }
 
   @override

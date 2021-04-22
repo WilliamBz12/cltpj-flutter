@@ -34,7 +34,7 @@ class PjModel {
   double get yearDiscount =>
       (expensesMotnherAccountant +
               anotherMonthExpenses +
-              (taxPercentage * monthlyValue)) *
+              ((taxPercentage / 100) * monthlyValue)) *
           12 +
       anotherYearExpenses;
 

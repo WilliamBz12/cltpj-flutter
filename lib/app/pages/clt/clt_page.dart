@@ -29,7 +29,9 @@ class _CltPageState extends State<CltPage> {
   final anotherDiscounts$ = TextEditingController();
 
   double getValue(String text) {
-    return double.tryParse(text.replaceAll("R\$", "")) ?? 0;
+    String withoutCaracters = text.replaceAll("R\$", "").replaceAll(",", "");
+    double value = double.tryParse(withoutCaracters) ?? 0;
+    return value;
   }
 
   @override
