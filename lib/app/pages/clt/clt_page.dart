@@ -70,6 +70,7 @@ class _CltPageState extends State<CltPage> {
                           phoneValue: getValue(phoneValue$.text),
                           plrAnnual: getValue(plrAnnual$.text),
                         );
+
                         context
                             .read(dataComparationProvider.notifier)
                             .addCltModel(data);

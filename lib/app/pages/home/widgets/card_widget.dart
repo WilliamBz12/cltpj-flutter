@@ -23,10 +23,13 @@ class _CardWidgetState extends State<CardWidget> {
   Widget build(BuildContext context) {
     return Card(
       color: widget.checked ? AppColors.success : AppColors.infoLight,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(6.0),
+      ),
       child: InkWell(
         onTap: () => widget.onTap(),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -38,12 +41,9 @@ class _CardWidgetState extends State<CardWidget> {
                 ),
               ),
               if (widget.checked)
-                IconButton(
-                  onPressed: () => widget.clear,
-                  icon: Icon(
-                    Icons.delete,
-                    color: Colors.white,
-                  ),
+                Icon(
+                  Icons.check,
+                  color: Colors.white,
                 ),
             ],
           ),

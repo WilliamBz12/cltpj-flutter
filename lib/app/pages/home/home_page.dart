@@ -42,7 +42,11 @@ class _HomePageState extends State<HomePage> {
             children: <Widget>[
               CardWidget(
                 title: "Dados CLT",
-                clear: () {},
+                clear: () {
+                  context
+                      .read(dataComparationProvider.notifier)
+                      .addCltModel(null);
+                },
                 onTap: () async {
                   context.router.root.push(CltPageRoute());
                 },
@@ -50,7 +54,11 @@ class _HomePageState extends State<HomePage> {
               ),
               SizedBox(height: 20),
               CardWidget(
-                clear: () {},
+                clear: () {
+                  context
+                      .read(dataComparationProvider.notifier)
+                      .addPjModel(null);
+                },
                 onTap: () async {
                   context.router.root.push(
                     PjPageRoute(pjModel: dataComparation.pjModel),

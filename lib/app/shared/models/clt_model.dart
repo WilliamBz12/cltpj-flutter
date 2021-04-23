@@ -61,7 +61,7 @@ class CltModel {
   }
 
   double get allRendiments =>
-      allBenefits + annualGrossSalary + thirdTeenSalary + plrValue;
+      allBenefits + annualGrossSalary + thirdTeenSalary + plrValue + vacations;
 
   double get liquidValueTotal => allRendiments - allDiscounts;
 

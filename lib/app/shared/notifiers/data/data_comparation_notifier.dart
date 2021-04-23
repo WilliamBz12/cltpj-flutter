@@ -6,11 +6,11 @@ import 'package:pjorclt/app/shared/models/pj_model.dart';
 class DataComparationNotifier extends StateNotifier<ComparationModel> {
   DataComparationNotifier() : super(ComparationModel());
 
-  void addPjModel(PjModel pjModel) {
+  void addPjModel(PjModel? pjModel) {
     state = state.copyWith(pjModel: pjModel);
   }
 
-  void addCltModel(CltModel cltModel) {
+  void addCltModel(CltModel? cltModel) {
     state = state.copyWith(cltModel: cltModel);
   }
 

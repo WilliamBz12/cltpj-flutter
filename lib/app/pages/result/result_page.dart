@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pjorclt/app/shared/models/comparation_model.dart';
+import 'package:pjorclt/app/shared/style/colors.dart';
 import 'package:pjorclt/app/shared/widgets/app_bar.dart';
 import 'package:pjorclt/app/shared/widgets/card_responsible_widget.dart';
 
 extension on double {
-  String get toMoney => "R\$${this.toStringAsFixed(2).replaceAll(".", ",")}";
+  String get toMoney => "R\$ ${this.toStringAsFixed(2).replaceAll(".", ",")}";
 }
 
 class ResultPage extends StatefulWidget {
@@ -15,12 +16,23 @@ class ResultPage extends StatefulWidget {
 }
 
 class _ResultPageState extends State<ResultPage> {
-  Widget _buildItem({required String text, required String content}) {
+  Widget _buildItem({
+    required String text,
+    required String content,
+    Color? color = Colors.black,
+  }) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(text),
-        Text(content),
+        Text(
+          content,
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: color,
+          ),
+        ),
       ],
     );
   }
@@ -48,13 +60,14 @@ class _ResultPageState extends State<ResultPage> {
                     _buildItem(
                       text: "Diferença % a mais como ${widget.data.bestOption}",
                       content:
-                          "${(widget.data.morePercent * 100).toStringAsFixed(2).replaceAll(".", ",")}",
+                          "${(widget.data.morePercent * 100).toStringAsFixed(2).replaceAll(".", ",")}%",
                     ),
                     SizedBox(height: 20),
                     _buildItem(
                       text:
                           "Diferença líquida anual como ${widget.data.bestOption}",
                       content: "${widget.data.diferenceYearLiquid.toMoney}",
+                      color: AppColors.success,
                     ),
                   ],
                 ),
@@ -70,22 +83,27 @@ class _ResultPageState extends State<ResultPage> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 5),
+                    Divider(),
+                    SizedBox(height: 5),
                     _buildItem(
                       text: "Total dos rendimentos",
-                      content:
-                          " ${widget.data.cltModel!.allRendiments.toMoney}",
+                      content: "${widget.data.cltModel!.allRendiments.toMoney}",
+                      color: AppColors.success,
                     ),
                     SizedBox(height: 10),
                     _buildItem(
                       text: "Total de descontos",
-                      content: "${widget.data.cltModel!.allDiscounts.toMoney}",
+                      content:
+                          "- ${widget.data.cltModel!.allDiscounts.toMoney}",
+                      color: AppColors.danger,
                     ),
                     SizedBox(height: 10),
                     _buildItem(
                       text: "Total líquido",
                       content:
-                          " ${widget.data.cltModel!.liquidValueTotal.toMoney}",
+                          "${widget.data.cltModel!.liquidValueTotal.toMoney}",
+                      color: AppColors.success,
                     ),
                     SizedBox(height: 10),
                     _buildItem(
@@ -96,9 +114,9 @@ class _ResultPageState extends State<ResultPage> {
                     _buildItem(
                       text: "Total líquido com FGTS",
                       content:
-                          " ${widget.data.cltModel!.totalLiquidWithFgts.toMoney}",
+                          "${widget.data.cltModel!.totalLiquidWithFgts.toMoney}",
+                      color: AppColors.success,
                     ),
-                    SizedBox(height: 10),
                   ],
                 ),
               ),
@@ -113,23 +131,27 @@ class _ResultPageState extends State<ResultPage> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 5),
+                    Divider(),
+                    SizedBox(height: 5),
                     _buildItem(
                       text: "Total dos rendimentos",
                       content:
                           "${widget.data.pjModel!.allRendimentsPerYear.toMoney}",
+                      color: AppColors.success,
                     ),
                     SizedBox(height: 10),
                     _buildItem(
                       text: "Total de descontos",
-                      content: "${widget.data.pjModel!.yearDiscount.toMoney}",
+                      content: "- ${widget.data.pjModel!.yearDiscount.toMoney}",
+                      color: AppColors.danger,
                     ),
                     SizedBox(height: 10),
                     _buildItem(
                       text: "Total líquido",
                       content: "${widget.data.pjModel!.liquidValue.toMoney}",
+                      color: AppColors.success,
                     ),
-                    SizedBox(height: 10),
                   ],
                 ),
               ),
